@@ -1,0 +1,8 @@
+{
+    "token": "",
+    "prefix": "",
+    "client_options": {
+        "fetchAllMembers": true,
+        "disableEveryone": true
+    }
+}
