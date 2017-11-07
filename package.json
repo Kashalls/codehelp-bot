@@ -1,0 +1,30 @@
+{
+  "name": "codehelper-bot",
+  "version": "0.0.1",
+  "description": "A Discord.js@master bot for Coding discord servers having features like MDN",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrJacz/codehelp-bot.git"
+  },
+  "keywords": [
+    "Discord",
+    "Discord",
+    "bot",
+    "Discord.js",
+    "bot"
+  ],
+  "author": "Jacz <admin@jaczaus.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrJacz/codehelp-bot/issues"
+  },
+  "homepage": "https://github.com/MrJacz/codehelp-bot#readme",
+  "dependencies": {
+    "discord.js": "github:hydrabolt/discord.js",
+    "klasa": "github:dirigeants/klasa"
+  }
+}
