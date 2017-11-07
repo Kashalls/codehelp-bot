@@ -4,7 +4,8 @@
   "description": "A Discord.js@master bot for Coding discord servers having features like MDN",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "start-dev": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,11 @@
   "homepage": "https://github.com/MrJacz/codehelp-bot#readme",
   "dependencies": {
     "discord.js": "github:hydrabolt/discord.js",
-    "klasa": "github:dirigeants/klasa"
+    "klasa": "github:dirigeants/klasa",
+    "snekfetch": "^3.5.8"
+  },
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "nodemon": "^1.12.1"
   }
 }
