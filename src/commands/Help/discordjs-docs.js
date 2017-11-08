@@ -9,9 +9,9 @@ module.exports = class extends Command {
             aliases: ["djs", "djsdocs", "docs"],
             botPerms: ["EMBED_LINKS"],
             description: "Search the discord.js documentation",
-            usage: "<Search:string> [version:string]",
+            usage: "<Search:string> [version:regex/#?([\\da-f]{6})/i]",
             usageDelim: " ",
-            extendedHelp: "Search the Discord.js Documentation for methods, properties and events."
+            extendedHelp: "Search the Discord.js Documentation for methods, properties and events.\n Link: <https://discord.js.org>"
         });
     }
 

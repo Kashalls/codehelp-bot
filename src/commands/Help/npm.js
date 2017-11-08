@@ -33,13 +33,16 @@ module.exports = class npmCommand extends Command {
             }
             // Now we just need to present the data to the end user.
             const embed = new this.client.methods.Embed()
-                .setColor(0xCB0000)
-                .setAuthor(body.name, "https://i.imgur.com/ErKf5Y0.png")
+                .setColor("RANDOM")
+                .setThumbnail("https://i.imgur.com/T0VLGPf.png")
+                .setURL(version.homepage)
+                .setAuthor(body.name, "https://i.imgur.com/ErKf5Y0.png", version.homepage)
                 .setDescription(`${body.description || "No description."}
 **Version:** ${body["dist-tags"].latest}
 **License:** ${body.license}
 **Author:** ${body.author ? body.author.name : "Unknown"}
 **Modified:** ${new Date(body.time.modified).toDateString()}
+**Main File:** ${version.main}
 **Dependencies:** ${deps && deps.length ? deps.join(", ") : "None"}
 **Download:** [${body.name}](https://www.npmjs.com/package/${query})`);
 
