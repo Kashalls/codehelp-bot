@@ -2,7 +2,7 @@ const { Command, Stopwatch } = require("klasa");
 const { inspect } = require("util");
 const discord = require("discord.js"); //eslint-disable-line
 
-module.exports = class extends Command {
+module.exports = class EvalCommand extends Command {
 
     constructor(...args) {
         super(...args, {
@@ -16,7 +16,9 @@ module.exports = class extends Command {
     }
 
     async run(msg, [...code]) {
-        const client = msg.client; //eslint-disable-line
+        const client = msg.client; // eslint-disable-line
+        const guild = msg.guild; // eslint-disable-line 
+        const settings = this.client.settings; // eslint-disable-line
         const start = new Stopwatch();
         try {
             const evaled = eval(code.join(" "));
@@ -32,17 +34,18 @@ ${this.client.methods.util.codeBlock("js", code.join(" "))}
 \`Output:\` **Evaled code was over 2000 letters Here yo go **${haste}`).catch(console.error);
             } else {
                 msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${typeof evaled || evaled.constructor.name}\`
-\`Input:\`\n${this.client.methods.util.codeBlock("js", code.join(" "))}
-\`Output:\` \`\`\`js
-${cleanEval}\`\`\`
+\`Input:\`
+${this.client.methods.util.codeBlock("js", code.join(" "))}
+\`Output:\`
+${this.client.methods.util.codeBlock("js", cleanEval)}
 `).catch(console.error);
             }
         } catch (err) {
             msg.send(`
-**Took:** \`${start.stop()}\n
+**Took:** \`${start.stop()}\`
 \`Input:\`
 ${this.client.methods.util.codeBlock("js", code.join(" "))}
-\`ERROR\`
+\`Error:\`
 ${this.client.methods.util.codeBlock("js", err)}`).catch(console.error);
             if (err.stack) this.client.emit("error", err.stack);
         }

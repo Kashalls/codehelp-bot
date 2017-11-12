@@ -9,7 +9,7 @@ module.exports = class extends Command {
             aliases: ["djs", "djsdocs", "docs"],
             botPerms: ["EMBED_LINKS"],
             description: "Search the discord.js documentation",
-            usage: "<Search:string> [version:regex/#?([\\da-f]{6})/i]",
+            usage: "<Search:string> [version:regex/stable|master/]",
             usageDelim: " ",
             extendedHelp: "Search the Discord.js Documentation for methods, properties and events.\n Link: <https://discord.js.org>"
         });
@@ -17,16 +17,23 @@ module.exports = class extends Command {
 
     async init() {
         this.docs = {};
+        this.client.docs = {};
+        const versions = ["stable", "master"];
+        for (let i = 0; i < versions.length; i++) {
+            if (this.docs[versions[i]]) return this.docs[versions[i]];
+            const link = `https://raw.githubusercontent.com/hydrabolt/discord.js/docs/${versions[i]}.json`;
+            const { text } = await get(link);
+            const json = JSON.parse(text);
+            this.docs[versions[i]] = json;
+        }
+        this.client.docs = this.docs;
     }
 
     async fetchDocs(version) {
         if (this.docs[version]) return this.docs[version];
-
         const link = `https://raw.githubusercontent.com/hydrabolt/discord.js/docs/${version}.json`;
-
         const { text } = await get(link);
         const json = JSON.parse(text);
-
         this.docs[version] = json;
         return json;
     }

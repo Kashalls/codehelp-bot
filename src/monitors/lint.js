@@ -14,6 +14,7 @@ module.exports = class extends Monitor {
     }
 
     async run(msg) {
+        if (!msg.guild.settings.lint) return;
         let code = ``;
         const groups = codeRegex.exec(msg.content);
         if (groups && groups[1] && groups[1].length) code = groups[1];
@@ -23,6 +24,12 @@ module.exports = class extends Monitor {
         console.log("errors", errors);
         if (errors.length) msg.react("❎");
         else if (!errors.length || !errors) msg.react("✅");
+    }
+
+    async init() {
+        if (!this.client.settings.guilds.schema.lint) {
+            await this.client.settings.guilds.add("lint", { type: "Boolean", default: false });
+        }
     }
 
 
