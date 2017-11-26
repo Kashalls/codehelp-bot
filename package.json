@@ -32,5 +32,6 @@
   "devDependencies": {
     "eslint": "^4.10.0",
     "nodemon": "^1.12.1"
-  }
+  },
+  "private": true
 }

@@ -28,12 +28,12 @@ module.exports = class EvalCommand extends Command {
             const cleanEval = this.client.methods.util.clean(ogeval);
             if (ogeval.length > 1950) {
                 const haste = await this.client.haste(cleanEval, "js").catch(console.error);
-                msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${typeof evaled || evaled.constructor.name}\`
+                msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${this.getComplexType(evaled).type}\`
 \`Input:\`
 ${this.client.methods.util.codeBlock("js", code.join(" "))}
 \`Output:\` **Evaled code was over 2000 letters Here yo go **${haste}`).catch(console.error);
             } else {
-                msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${typeof evaled || evaled.constructor.name}\`
+                msg.send(`**Took:** \`${start.stop()}\`, **Typeof:** \`${this.getComplexType(evaled).type}\`
 \`Input:\`
 ${this.client.methods.util.codeBlock("js", code.join(" "))}
 \`Output:\`
@@ -41,6 +41,7 @@ ${this.client.methods.util.codeBlock("js", cleanEval)}
 `).catch(console.error);
             }
         } catch (err) {
+            console.log(`Eval error:`, err.stack);
             msg.send(`
 **Took:** \`${start.stop()}\`
 \`Input:\`
@@ -54,5 +55,23 @@ ${this.client.methods.util.codeBlock("js", err)}`).catch(console.error);
     async init() {
         this.depth = 0;
     }
+
+    getType(value) {
+        if (value === null) return String(value);
+        return typeof value;
+    }
+
+    getComplexType(value) {
+        const basicType = this.getType(value);
+        if (basicType === "object" || basicType === "function") return { basicType, type: this.getClass(value) };
+        return { basicType, type: basicType };
+    }
+
+    getClass(value) {
+        return value && value.constructor && value.constructor.name ?
+            value.constructor.name :
+            {}.toString.call(value).match(/\[object (\w+)\]/)[1];
+    }
+
 
 };
