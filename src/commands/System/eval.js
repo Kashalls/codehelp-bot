@@ -1,8 +1,8 @@
-const { Command, Stopwatch } = require("klasa");
+const klasa = require("klasa");
 const { inspect } = require("util");
 const discord = require("discord.js"); //eslint-disable-line
 
-module.exports = class EvalCommand extends Command {
+module.exports = class EvalCommand extends klasa.Command {
 
     constructor(...args) {
         super(...args, {
@@ -19,7 +19,7 @@ module.exports = class EvalCommand extends Command {
         const client = msg.client; // eslint-disable-line
         const guild = msg.guild; // eslint-disable-line 
         const settings = this.client.settings; // eslint-disable-line
-        const start = new Stopwatch();
+        const start = new klasa.Stopwatch();
         try {
             const evaled = eval(code.join(" "));
             let ogeval = evaled;
