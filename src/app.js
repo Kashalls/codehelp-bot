@@ -1,6 +1,6 @@
 const { Client } = require("klasa");
 const config = require("./config.json");
-const { get, post } = require("snekfetch");
+const { post } = require("snekfetch");
 
 class CodeHelper extends Client {
 

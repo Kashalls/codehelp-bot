@@ -15,8 +15,8 @@ module.exports = class examplesCommand extends Command {
 
     async run(msg, [examplestr = "list", version = "master"]) {
         const docs = this.client.docs[version];
-        const examples = docs.custom.examples;
-        const files = examples.files;
+        const { examples } = docs.custom;
+        const { files } = examples;
         if (examplestr === "list") {
             let listofExamples = `** The examples on the Discord.js docs page**\n\n`;
             for (const i in files) listofExamples += `${i}\n`;
