@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "start-dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "test": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -26,12 +27,15 @@
   "homepage": "https://github.com/MrJacz/codehelp-bot#readme",
   "dependencies": {
     "discord.js": "github:hydrabolt/discord.js",
-    "js-beautify": "^1.7.4",
     "klasa": "github:dirigeants/klasa",
     "snekfetch": "^3.5.8"
   },
   "devDependencies": {
     "eslint": "^4.10.0",
     "nodemon": "^1.12.1"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=8.5.0"
   }
 }

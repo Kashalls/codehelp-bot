@@ -1,6 +1,6 @@
 const { Client } = require("klasa");
 const config = require("./config.json");
-const { get, post } = require("snekfetch");
+const { post } = require("snekfetch");
 
 class CodeHelper extends Client {
 
@@ -10,12 +10,11 @@ class CodeHelper extends Client {
         Object.defineProperty(this, "keys", { value: config });
     }
 
-    haste(input, extension) {
-        return new Promise((res, rej) => {
-            if (!input) rej("Input argument is required.");
-            post("https://hastebin.com/documents").send(input).then(body => {
-                res(`https://hastebin.com/${body.body.key}${extension ? `.${extension}` : ""}`);
-            }).catch(e => rej(e));
+    async haste(input, extension) {
+        return new Promise(async (res, rej) => {
+            if (!input) return rej("Input argument is required.");
+            const { body: { key }} = await post("https://hastebin.com/documents").send(input).catch(e => rej(e));
+            res(`https://hastebin.com/${key}${extension ? `.${extension}` : ""}`);
         });
     }
 
