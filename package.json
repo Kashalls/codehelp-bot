@@ -28,7 +28,7 @@
   "dependencies": {
     "discord.js": "github:hydrabolt/discord.js",
     "klasa": "github:dirigeants/klasa",
-    "snekfetch": "^3.5.8"
+    "snekfetch": "^4.0.4"
   },
   "devDependencies": {
     "eslint": "^4.10.0",
